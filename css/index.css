@@ -1,0 +1,64 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  background-color: #dfd2c2;
+  display: grid;
+  place-items: center;
+}
+body .container {
+  width: 50%;
+  border: 4px solid #000;
+}
+body .container .tltle {
+  background-color: #b8795a;
+  border-bottom: 4px solid #000;
+}
+body .container .tltle h1 {
+  padding-top: 4%;
+  padding-bottom: 4%;
+  text-align: center;
+  color: #fff;
+}
+body .container .content {
+  background-color: #e5e1dd;
+  padding-bottom: 1.5rem;
+}
+body .container .content .creat {
+  padding-top: 1.5rem;
+  padding-bottom: 1rem;
+  text-align: center;
+}
+body .container .content .creat input {
+  padding: 4px;
+  border-radius: 4px;
+  border: 2px solid #b8795a;
+  outline: none;
+}
+body .container .content .creat button {
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 12px;
+  padding-right: 12px;
+  border: none;
+  color: #fff;
+  background-color: #b8795a;
+  border-radius: 4px;
+}
+body .container .content .tabs {
+  text-align: center;
+}
+body .container .content .tabs span {
+  color: #aab0a9;
+}
+body .container .content .tabs .s1 {
+  margin-right: 5rem;
+}
+body .container .content .tabs .s3,
+body .container .content .tabs .s4 {
+  margin-left: 1rem;
+}/*# sourceMappingURL=index.css.map */
