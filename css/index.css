@@ -1,5 +1,4 @@
 * {
-  font-family: "Noto Sans";
   -webkit-user-select: none;
      -moz-user-select: none;
           user-select: none;
@@ -13,7 +12,6 @@ body {
   align-items: center;
 }
 body .container {
-  padding-bottom: 30px;
   border: 8px solid #000;
   background: #e5e1dd;
   display: flex;
@@ -22,7 +20,8 @@ body .container {
   flex-shrink: 0;
 }
 body .container .title {
-  padding: 30px 192px;
+  padding-top: 30px;
+  padding-bottom: 30px;
   background: #b8795a;
   color: #fff;
   font-size: 32px;
@@ -32,16 +31,21 @@ body .container .title {
   align-items: center;
   align-self: stretch;
 }
-body .container .creat {
-  display: flex;
+body .container .content {
   padding-top: 30px;
+  padding-bottom: 30px;
+  padding-left: 60px;
+  padding-right: 60px;
+}
+body .container .content .creat {
+  display: flex;
   justify-content: center;
   align-items: center;
   gap: 10px;
   align-self: stretch;
   position: relative;
 }
-body .container .creat input[type=text] {
+body .container .content .creat input[type=text] {
   width: 307px;
   padding: 8px 12px;
   border-radius: 8px;
@@ -49,14 +53,14 @@ body .container .creat input[type=text] {
   display: flex;
   align-items: center;
 }
-body .container .creat input[type=datetime-local] {
+body .container .content .creat input[type=datetime-local] {
   width: 16px;
   border: none;
   position: absolute;
-  top: 40px;
-  left: 372px;
+  top: 9px;
+  left: 309px;
 }
-body .container .creat button {
+body .container .content .creat button {
   width: 38px;
   height: 38px;
   border: none;
@@ -66,21 +70,29 @@ body .container .creat button {
   justify-content: center;
   align-items: center;
 }
-body .container .tabs {
+body .container .content .tabs {
   display: flex;
   padding-top: 10px;
   align-items: flex-start;
   gap: 160px;
   color: #aab0a9;
 }
-body .container .tabs .status {
+body .container .content .tabs .status {
   display: flex;
   align-items: flex-start;
   gap: 27px;
 }
-body .container .display ul {
-  display: flex;
+body .container .content .display ul {
+  margin-top: 20px;
 }
-body .container .display ul li {
+body .container .content .display ul li {
+  padding-top: 14px;
+  padding-bottom: 14px;
   border-bottom: 1px solid #aab0a9;
+  display: flex;
+  justify-content: space-between;
+}
+body .container .content .display ul li .todo-date,
+body .container .content .display ul li .todo-text {
+  margin-right: 6px;
 }/*# sourceMappingURL=index.css.map */
