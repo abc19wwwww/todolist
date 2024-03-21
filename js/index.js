@@ -1,18 +1,52 @@
-// get element
-const input = document.querySelector("input");
-const button = document.querySelector("#button");
-const display = document.querySelector(".display");
-// console.log(display);
+/* todo:
 
-const todo = []; // 等會將加入的代辦放進陣列裡變成物件
 
-// add event
-button.addEventListener("click", () => {
-  const inputVal = input.value;
-  input.value = ""; // 送出後清空輸入框
-  if (inputVal) {
-    const item = { id: new Date(), text: inputVal, completed: false };
-  }
+ ========== */
+
+// 獲取元素
+/**
+ * @type HTMLInputElement
+ */
+const input = document.querySelector("#todo");
+/**
+ * @type HTMLInputElement
+ */
+const time = document.querySelector("#time");
+const addBtn = document.querySelector("#add");
+const display = document.querySelector("#display");
+//  ==========
+
+let todos = [];
+
+// 處理函式
+const displayTodo = () => {
+  const displayItem = todos.map(
+    (v) =>
+      `<span class="todo-text">${v.text}</span>
+      <span class="todo-time">${v.time}</span>`
+  );
+
+  const str = `<input type="checkbox">
+  <li>${displayItem}</li>
+  <i class="fa-regular fa-circle-xmark" style="color: #b8795a;"></i>`;
+
+  display.innerHTML = `<ul>${str}</ul>`;
+};
+
+const addTodoObj = () => {
+  const todosItem = {
+    id: +new Date(),
+    text: input.value,
+    time: time.value,
+    completed: false,
+  };
+
+  todos.unshift(todosItem);
+  displayTodo();
+};
+//  ==========
+
+// 事件
+addBtn.addEventListener("click", () => {
+  addTodoObj();
 });
-
-// fun
