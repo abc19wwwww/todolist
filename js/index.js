@@ -1,8 +1,5 @@
 /* todo:
-在 li 上 bdclick 可以進行 v.text 文字編輯
-1. 在 li 上綁事件
-2. 編輯狀態時，要把 span 轉換成 input
-3. 按下儲存則相反
+
  ========== */
 
 // 獲取元素
@@ -21,6 +18,11 @@ const display = document.querySelector("#display");
 let todos = [];
 
 // 處理函式
+// 將事項存入 localStorage
+function storage() {
+  localStorage.setItem("todos", JSON.stringify(todos));
+}
+
 // html 模組化
 function html(v) {
   const date = v.time ? v.time.split("T")[0] : "";
@@ -28,15 +30,17 @@ function html(v) {
   const completedStyle = v.completed ? "text-decoration: line-through;" : "";
 
   return `<li>
-            <div>
+            <div class="li-left">
             <input type="checkbox" data-id="${v.id}" ${
     v.completed ? "checked" : ""
   }> 
               <span class="todo-date" style="${completedStyle}">${date}</span>
               <span class="todo-time" style="${completedStyle}">${time}</span>
             </div>
-            <div>
-            <span class="todo-text" style="${completedStyle}">${v.text}</span>
+            <div class="li-rigth">
+            <span class="todo-text" data-id="${
+              v.id
+            }" style="${completedStyle}">${v.text}</span>
               <i class="fa-regular fa-circle-xmark" data-id="${
                 v.id
               }" style="color: #b8795a;"></i>
@@ -49,6 +53,14 @@ const displayTodo = () => {
   const displayItem = todos.map(html).join("");
   display.innerHTML = `<ul>${displayItem}</ul>`;
 };
+
+document.addEventListener("DOMContentLoaded", () => {
+  const storedTodos = JSON.parse(localStorage.getItem("todos"));
+  if (storedTodos) {
+    todos = storedTodos;
+    displayTodo();
+  }
+});
 
 // 將輸入的事項加入到陣列中變成物件
 const addTodoObj = () => {
@@ -63,6 +75,7 @@ const addTodoObj = () => {
   displayTodo();
   input.value = "";
   time.value = "";
+  storage();
 };
 
 // 更新 completed
@@ -71,6 +84,7 @@ const todoCompleted = (id, completed) => {
   if (todoIndex !== -1) {
     todos[todoIndex].completed = completed;
     displayTodo();
+    storage();
   }
 };
 
@@ -78,6 +92,7 @@ const todoCompleted = (id, completed) => {
 const deleteTodo = (id) => {
   todos = todos.filter((todo) => todo.id !== id);
   displayTodo();
+  storage();
 };
 
 //  ==========
@@ -109,5 +124,35 @@ display.addEventListener("click", (e) => {
   if (e.target.matches(".fa-circle-xmark")) {
     const id = parseInt(e.target.dataset.id);
     deleteTodo(id);
+  }
+});
+
+// 雙點擊進行編輯
+display.addEventListener("dblclick", (e) => {
+  if (e.target.matches(".todo-text")) {
+    const id = parseInt(e.target.dataset.id);
+    const text = e.target.innerText;
+    const input = document.createElement("input");
+    input.type = "text";
+    input.value = text;
+    input.classList.add("todo-edit");
+
+    e.target.replaceWith(input);
+    input.focus();
+
+    const saveEdit = () => {
+      const newText = input.value;
+      const todoIndex = todos.findIndex((todo) => todo.id === id);
+      if (todoIndex !== -1) {
+        todos[todoIndex].text = newText;
+        displayTodo();
+      }
+    };
+
+    input.addEventListener("keypress", (e) => {
+      if (e.key === "Enter") {
+        saveEdit();
+      }
+    });
   }
 });

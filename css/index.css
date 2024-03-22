@@ -71,9 +71,10 @@ body .container .content .creat button {
   align-items: center;
 }
 body .container .content .tabs {
-  display: flex;
   padding-top: 10px;
+  display: flex;
   align-items: flex-start;
+  justify-content: space-between;
   gap: 160px;
   color: #aab0a9;
 }
@@ -81,6 +82,13 @@ body .container .content .tabs .status {
   display: flex;
   align-items: flex-start;
   gap: 27px;
+}
+body .container .content .tabs .status button {
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  color: #aab0a9;
+  cursor: pointer;
 }
 body .container .content .display ul {
   margin-top: 20px;
@@ -92,7 +100,17 @@ body .container .content .display ul li {
   display: flex;
   justify-content: space-between;
 }
+body .container .content .display ul li .li-left,
+body .container .content .display ul li .li-rigth {
+  display: flex;
+  align-items: center;
+}
 body .container .content .display ul li .todo-date,
 body .container .content .display ul li .todo-text {
   margin-right: 6px;
+}
+body .container .content .display ul li .todo-edit {
+  padding: 4px 6px;
+  border: 1px solid #b8795a;
+  border-radius: 4px;
 }/*# sourceMappingURL=index.css.map */

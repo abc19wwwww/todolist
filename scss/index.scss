@@ -83,9 +83,10 @@ body {
       }
 
       .tabs {
-        display: flex;
         padding-top: 10px;
+        display: flex;
         align-items: flex-start;
+        justify-content: space-between;
         gap: 160px;
         color: $gray-600;
 
@@ -93,6 +94,14 @@ body {
           display: flex;
           align-items: flex-start;
           gap: 27px;
+
+          button {
+            padding: 0;
+            border: none;
+            background-color: transparent;
+            color: $gray-600;
+            cursor: pointer;
+          }
         }
       }
 
@@ -107,9 +116,21 @@ body {
             display: flex;
             justify-content: space-between;
 
+            .li-left,
+            .li-rigth {
+              display: flex;
+              align-items: center;
+            }
+
             .todo-date,
             .todo-text {
               margin-right: 6px;
+            }
+
+            .todo-edit {
+              padding: 4px 6px;
+              border: 1px solid $main;
+              border-radius: 4px;
             }
           }
         }
