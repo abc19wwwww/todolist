@@ -19,6 +19,7 @@ body {
   align-items: center;
 
   .container {
+    height: 80vh;
     border: 8px solid $black;
     background: $gray-300;
     display: flex;
@@ -101,6 +102,10 @@ body {
             background-color: transparent;
             color: $gray-600;
             cursor: pointer;
+          }
+
+          .active {
+            color: $main;
           }
         }
       }

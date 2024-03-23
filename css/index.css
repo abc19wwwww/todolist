@@ -12,6 +12,7 @@ body {
   align-items: center;
 }
 body .container {
+  height: 80vh;
   border: 8px solid #000;
   background: #e5e1dd;
   display: flex;
@@ -89,6 +90,9 @@ body .container .content .tabs .status button {
   background-color: transparent;
   color: #aab0a9;
   cursor: pointer;
+}
+body .container .content .tabs .status .active {
+  color: #b8795a;
 }
 body .container .content .display ul {
   margin-top: 20px;

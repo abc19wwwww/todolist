@@ -1,5 +1,6 @@
 /* todo:
-
+1. 看 todos 的長度是多少
+2. 顯示在總數上
  ========== */
 
 // 獲取元素
@@ -16,6 +17,7 @@ const display = document.querySelector("#display");
 //  ==========
 
 let todos = [];
+let active = "all";
 
 // 處理函式
 // 將事項存入 localStorage
@@ -52,15 +54,8 @@ function html(v) {
 const displayTodo = () => {
   const displayItem = todos.map(html).join("");
   display.innerHTML = `<ul>${displayItem}</ul>`;
+  total();
 };
-
-document.addEventListener("DOMContentLoaded", () => {
-  const storedTodos = JSON.parse(localStorage.getItem("todos"));
-  if (storedTodos) {
-    todos = storedTodos;
-    displayTodo();
-  }
-});
 
 // 將輸入的事項加入到陣列中變成物件
 const addTodoObj = () => {
@@ -95,11 +90,46 @@ const deleteTodo = (id) => {
   storage();
 };
 
+// 總筆數
+const total = () => {
+  const totalObj = document.querySelector("#total");
+  totalObj.textContent = `共${todos.length}筆`;
+};
+
+// 切換頁籤時的過濾 顯示到頁面上
+const displayActive = () => {
+  let filter;
+  if (active === "all") {
+    filter = todos;
+  } else if (active === "completed") {
+    filter = todos.filter((todo) => todo.completed);
+  } else {
+    filter = todos.filter((todo) => !todo.completed);
+  }
+
+  const displayItem = filter.map(html).join("");
+  display.innerHTML = `<ul>${displayItem}</ul>`;
+};
+
+// 切換頁籤樣式
+const updateActiveTab = () => {
+  document.querySelectorAll(".tab").forEach((tab) => {
+    if (tab.dataset.filter === active) {
+      tab.classList.add("active");
+    } else {
+      tab.classList.remove("active");
+    }
+  });
+};
+
 //  ==========
 
 // 事件監聽
 // 按下加號按鈕時
 addBtn.addEventListener("click", () => {
+  if (input.value === "") {
+    return;
+  }
   addTodoObj();
 });
 
@@ -131,6 +161,11 @@ display.addEventListener("click", (e) => {
 display.addEventListener("dblclick", (e) => {
   if (e.target.matches(".todo-text")) {
     const id = parseInt(e.target.dataset.id);
+    const todo = todos.find((todo) => todo.id === id);
+    if (todo.completed) {
+      return;
+    }
+
     const text = e.target.innerText;
     const input = document.createElement("input");
     input.type = "text";
@@ -154,5 +189,23 @@ display.addEventListener("dblclick", (e) => {
         saveEdit();
       }
     });
+  }
+});
+
+// 切換頁籤
+document.querySelector(".status").addEventListener("click", (e) => {
+  if (e.target.matches(".tab")) {
+    active = e.target.dataset.filter;
+    displayActive();
+    updateActiveTab();
+  }
+});
+
+// 讀取 localStorage
+document.addEventListener("DOMContentLoaded", () => {
+  const storedTodos = JSON.parse(localStorage.getItem("todos"));
+  if (storedTodos) {
+    todos = storedTodos;
+    displayTodo();
   }
 });
