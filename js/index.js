@@ -1,6 +1,5 @@
 /* todo:
-1. 看 todos 的長度是多少
-2. 顯示在總數上
+1. 根據不同的頁籤顯示相對的總筆數
  ========== */
 
 // 獲取元素
@@ -92,8 +91,17 @@ const deleteTodo = (id) => {
 
 // 總筆數
 const total = () => {
+  let count;
   const totalObj = document.querySelector("#total");
-  totalObj.textContent = `共${todos.length}筆`;
+
+  if (active === "all") {
+    count = todos.length;
+  } else {
+    const isCompleted = active === "completed";
+    count = todos.filter((todo) => todo.completed === isCompleted).length;
+  }
+
+  totalObj.textContent = `共${count}筆`;
 };
 
 // 切換頁籤時的過濾 顯示到頁面上
@@ -109,6 +117,7 @@ const displayActive = () => {
 
   const displayItem = filter.map(html).join("");
   display.innerHTML = `<ul>${displayItem}</ul>`;
+  total();
 };
 
 // 切換頁籤樣式
