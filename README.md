@@ -1,5 +1,5 @@
 <h1>代辦事項 Todo List</h1>
-一個簡單的代辦事項列表，視覺部分使用SCSS，功能部分使用純JS
+一個簡單的代辦事項列表，視覺部分使用SCSS跟Bootstrap，功能部分使用純JS
 <br/>
 <br/>
 <h2>Demo</h2>
